@@ -1,0 +1,16 @@
+{
+  "name": "scheduler",
+  "version": "1.0.0",
+  "description": "A reasonable schedule for my busy life",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Rabl <chris@crabl.net>",
+  "license": "MIT",
+  "dependencies": {
+    "later": "^1.1.9",
+    "moment": "^2.10.6",
+    "schedulejs": "^0.6.3"
+  }
+}
