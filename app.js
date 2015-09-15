@@ -8,32 +8,8 @@ var date_format = 'ddd, Do, HH:mm';
 var awake_time = 'every weekday after 5:30am and before 11pm';
 var start_date = '2015-09-15';
 
-var constraints = [{
-  name: '1',
-  available: 'after 5:30am and before 11pm on Monday through Thursday and after 5:30am and before 9pm on Friday'
-}, {
-  name: '2',
-  available: 'after 5pm on Monday, Wednesday, and Friday'
-}];
-
-var items = [{
-  name: 'Work',
-  duration: 8.5,
-  timeboxes: 1, // needs to be done in a single timebox
-  available: 'every weekday after 7:30am',
-  constraints: []
-}, {
-  name: 'Something',
-  timeboxes: 1,
-  duration: 1,
-  available: 'on Monday, Tuesday and Thursday',
-  constraints: ['1']
-}, {
-  name: 'Another',
-  timeboxes: 0,
-  duration: 2,
-  constraints: ['2']
-}];
+var constraints = require('./data/constraints.json');
+var items = require('./data/tasks.json');
 
 function itemsToTasks(items) {
   return schedule

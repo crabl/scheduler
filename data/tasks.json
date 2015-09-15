@@ -1,0 +1,18 @@
+[{
+  "name": "Work",
+  "duration": 8.5,
+  "timeboxes": 1,
+  "available": "every weekday after 7:30am",
+  "constraints": []
+}, {
+  "name": "Something",
+  "timeboxes": 1,
+  "duration": 1,
+  "available": "on Monday, Tuesday and Thursday",
+  "constraints": ["1"]
+}, {
+  "name": "Another",
+  "timeboxes": 0,
+  "duration": 2,
+  "constraints": ["2"]
+}]
