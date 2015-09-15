@@ -5,9 +5,8 @@ var moment = require('moment');
 schedule.date.localTime(); // Use local time
 
 var date_format = 'ddd, Do, HH:mm';
-
 var awake_time = later.parse.text('every weekday after 5:30am and before 11pm');
-var start = moment('2015-09-15');
+var start_date = '2015-09-15';
 
 var constraints = [{
   name: '1',
@@ -56,7 +55,7 @@ function constraintsToResources(constraints) {
 var tasks = itemsToTasks(items);
 var resources = constraintsToResources(constraints);
 
-var calendar = schedule.create(tasks, resources, awake_time, start.toDate());
+var calendar = schedule.create(tasks, resources, awake_time, moment(start_date));
 
 var st = calendar.scheduledTasks;
 var keys = Object.keys(st)
