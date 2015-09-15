@@ -2,10 +2,12 @@ var schedule = require('schedulejs');
 var later = require('later');
 var moment = require('moment');
 
-var date_format = 'ddd, Do, HH:MM';
+schedule.date.localTime(); // Use local time
+
+var date_format = 'ddd, Do, HH:mm';
 
 var awake_time = later.parse.text('every weekday after 5:30am and before 11pm');
-var start_date = moment('2015-09-15');
+var start = moment('2015-09-15');
 
 var constraints = [{
   name: '1',
@@ -25,7 +27,13 @@ var items = [{
   name: 'Something',
   timeboxes: 1,
   duration: 1,
-  constraints: []
+  available: 'on Monday, Tuesday and Thursday',
+  constraints: ['1']
+}, {
+  name: 'Another',
+  timeboxes: 0,
+  duration: 2,
+  constraints: ['2']
 }];
 
 function itemsToTasks(items) {
@@ -48,13 +56,19 @@ function constraintsToResources(constraints) {
 var tasks = itemsToTasks(items);
 var resources = constraintsToResources(constraints);
 
-var calendar = schedule.create(tasks, resources, awake_time, start_date);
+var calendar = schedule.create(tasks, resources, awake_time, start.toDate());
 
-for(var id in calendar.scheduledTasks) {
-  var st = calendar.scheduledTasks[id];
-  // console.log(st);
-  console.log(id);
-  console.log(st.duration / 60);
-  console.log(moment(st.earlyStart).format(date_format));
-  console.log(moment(st.earlyFinish).format(date_format));
-}
+var st = calendar.scheduledTasks;
+var keys = Object.keys(st)
+
+keys.map((key) => {
+  return {
+    name: key,
+    duration: st[key].duration / 60,
+    start: moment(st[key].earlyStart).format(date_format),
+    finish: moment(st[key].earlyFinish).format(date_format)
+  };
+}).forEach((item) => {
+  console.log(`${item.name} (${item.duration} hours)`);
+  console.log(`${item.start} to ${item.finish}`);
+});
