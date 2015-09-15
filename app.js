@@ -18,7 +18,7 @@ var constraints = [{
 
 var items = [{
   name: 'Work',
-  duration: 8,
+  duration: 8.5,
   timeboxes: 1, // needs to be done in a single timebox
   available: 'every weekday after 7:30am',
   constraints: []
@@ -60,14 +60,14 @@ var calendar = schedule.create(tasks, resources, later.parse.text(awake_time), m
 var st = calendar.scheduledTasks;
 var keys = Object.keys(st)
 
-keys.map((key) => {
+keys.map(key => {
   return {
     name: key,
     duration: st[key].duration / 60,
     start: moment(st[key].earlyStart).format(date_format),
     finish: moment(st[key].earlyFinish).format(date_format)
   };
-}).forEach((item) => {
+}).forEach(item => {
   console.log(`${item.name} (${item.duration} hours)`);
   console.log(`${item.start} to ${item.finish}`);
 });
